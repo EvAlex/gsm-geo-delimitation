@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "delimitator",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "delimitator": {
+      "projectType": "application",
+      "root": "apps/delimitator",
+      "sourceRoot": "apps/delimitator/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/delimitator",
+            "index": "apps/delimitator/src/index.html",
+            "main": "apps/delimitator/src/main.ts",
+            "polyfills": "apps/delimitator/src/polyfills.ts",
+            "tsConfig": "apps/delimitator/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/delimitator/src/favicon.ico",
+              "apps/delimitator/src/assets"
+            ],
+            "styles": ["apps/delimitator/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/delimitator/src/environments/environment.ts",
+                  "with": "apps/delimitator/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "delimitator:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "delimitator:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "delimitator:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/delimitator/src/**/*.ts",
+              "apps/delimitator/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/delimitator"],
+          "options": {
+            "jestConfig": "apps/delimitator/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "delimitator-e2e": {
+      "root": "apps/delimitator-e2e",
+      "sourceRoot": "apps/delimitator-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/delimitator-e2e/cypress.json",
+            "tsConfig": "apps/delimitator-e2e/tsconfig.e2e.json",
+            "devServerTarget": "delimitator:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "delimitator:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/delimitator-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
