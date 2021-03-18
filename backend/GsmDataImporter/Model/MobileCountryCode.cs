@@ -11,7 +11,9 @@ namespace GsmDataImporter.Model
 
         public override bool Equals(object obj)
         {
-            return value.Equals(obj);
+            return obj is MobileCountryCode 
+                ? value.Equals(((MobileCountryCode)obj).value) 
+                : false;
         }
 
         public override int GetHashCode()

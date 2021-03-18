@@ -27,6 +27,9 @@ namespace GsmDataImporter
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
+
+                    parts = line.Split(separator);
+                    
                     yield return ParseLine(parts, schema);
                 }
             }
