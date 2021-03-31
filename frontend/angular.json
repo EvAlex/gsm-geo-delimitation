@@ -51,7 +51,10 @@
               "apps/delimitator/src/favicon.ico",
               "apps/delimitator/src/assets"
             ],
-            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/delimitator/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/delimitator/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -142,6 +145,56 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/delimitator-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "navigation-shell": {
+      "projectType": "library",
+      "root": "libs/navigation/shell",
+      "sourceRoot": "libs/navigation/shell/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/navigation/shell/src/**/*.ts",
+              "libs/navigation/shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/navigation/shell"],
+          "options": {
+            "jestConfig": "libs/navigation/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "navigation-feature-navbar": {
+      "projectType": "library",
+      "root": "libs/navigation/feature-navbar",
+      "sourceRoot": "libs/navigation/feature-navbar/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/navigation/feature-navbar/src/**/*.ts",
+              "libs/navigation/feature-navbar/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/navigation/feature-navbar"],
+          "options": {
+            "jestConfig": "libs/navigation/feature-navbar/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

@@ -14,7 +14,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@gsm-geo-delimitation/navigation/shell": [
+        "libs/navigation/shell/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/navigation/feature-navbar": [
+        "libs/navigation/feature-navbar/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

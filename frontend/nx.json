@@ -1,29 +1,19 @@
 {
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "gsm-geo-delimitation",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZDY5YjI4Y2YtYzVhZC00MDhkLTlmODUtYTgwOTZjNzU1MDBifHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -31,14 +21,9 @@
     }
   },
   "projects": {
-    "delimitator": {
-      "tags": []
-    },
-    "delimitator-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "delimitator"
-      ]
-    }
+    "delimitator": { "tags": [] },
+    "delimitator-e2e": { "tags": [], "implicitDependencies": ["delimitator"] },
+    "navigation-shell": { "tags": [] },
+    "navigation-feature-navbar": { "tags": [] }
   }
 }
