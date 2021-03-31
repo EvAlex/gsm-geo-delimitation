@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+:host {
+    display: block;
+    height: 56px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    background-color: var(--color-primary);
+}
