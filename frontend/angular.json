@@ -51,7 +51,7 @@
               "apps/delimitator/src/favicon.ico",
               "apps/delimitator/src/assets"
             ],
-            "styles": ["apps/delimitator/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css", "apps/delimitator/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
