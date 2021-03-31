@@ -49,9 +49,29 @@ namespace GsmDataImporter
             return new GsmEntry
             {
                 MobileCountryCode = new MobileCountryCode(int.Parse(lineParts[schema.MccIndex])),
+                MobileNetworkCode = new MobileNetworkCode(string.Parse(lineParts[schema.MncIndex])),
+                LocationAreaCode = new LocationAreaCode(int.Parse(lineParts[schema.LacIndex])),
+                CellId = new CellId(int.Parse(lineParts[schema.CellIndex])),
+                Longitude = new Longitude(double.Parse(lineParts[schema.LonIndex])),
+                Latitude = new Latitude(double.Parse(lineParts[schema.LatIndex])),
+                Subject = new Subject(int.Parse(lineParts[schema.SubjectIndex])),
+                Location = new Location(string.Parse(lineParts[schema.LocationIndex])),
+                Raster = new Raster(double.Parse(lineParts[schema.RasterIndex])),
+                Address = new Address(string.Parse(lineParts[schema.AdressIndex])),
+                Generation = new Generation(string.Parse(lineParts[schema.GenerationIndex])),
+                Height = new Height(double.Parse(lineParts[schema.HeightIndex])),
+                Tilt = new Tilt(double.Parse(lineParts[schema.TiltIndex])),
+                Azimuth = new Azimuth(double.Parse(lineParts[schema.AzimuthIndex])),
+                Frequency = new Frequency(double.Parse(lineParts[schema.FrequencyIndex])),
+
+
                 //  TODO add other props
-                //  MCC;MNC;LAC;CELL;RAC;LON;LAT;SUBJECT;DATE_ON;DATE_OFF;AZIMUTH;HEIGHT;TILT;RASTER;THICKNESS;FREQUENCY;POWER;AMPLIFICATION;BORDER;LOCATION;ADDRESS;GENERATION;CONTROLLER_NUM
-            };
+                //  DATE_ON;DATE_OFF - ��������� ���?
+                // RAC - �� ������� �������� ���� �������,  � ������� ������� ��������� ����
+                // AMPLIFICATION,THICKNESS - ���� �������� ��� ���� ��� ��� double(�������� ����� ��� exel);
+                // BORDER - ������� ������ ����
+                // POWER - ������� ������ ����
+            };  
         }
 
         private GsmCsvSchema CreateDefaultSchema()
@@ -59,7 +79,22 @@ namespace GsmDataImporter
             return new GsmCsvSchema
             {
                 MccIndex = 0,
-                MncIndex = 1,
+                MncIndex = "", // not sure
+                LacIndex = 0,
+                CellIndex = 0,
+                LonIndex = 0.,
+                LatIndex = 0.,
+                SubjectIndex = 0,
+                LocationIndex = "", // not sure
+                RasterIndex = 0.,
+                AdressIndex = "", // not sure
+                GenerationIndex = "",
+                HeightIndex = 0.,
+                TiltIndex = 0.,
+                AzimuthIndex = 0.,
+                FrequencyIndex = 0.,
+
+
                 //  TODO add other props 
                 //  MCC;MNC;LAC;CELL;RAC;LON;LAT;SUBJECT;DATE_ON;DATE_OFF;AZIMUTH;HEIGHT;TILT;RASTER;THICKNESS;FREQUENCY;POWER;AMPLIFICATION;BORDER;LOCATION;ADDRESS;GENERATION;CONTROLLER_NUM
             };
@@ -71,6 +106,19 @@ namespace GsmDataImporter
             {
                 MccIndex = FindHeaderCellIndex(headerLineParts, "mcc", "mobile country code"),
                 MncIndex = FindHeaderCellIndex(headerLineParts, "mnc", "mobile network code"),
+                LacIndex = FindHeaderCellIndex(headerLineParts, "lac", "Location are code"),
+                CellIndex = FindHeaderCellIndex(headerLineParts, "cell"),
+                LonIndex = FindHeaderCellIndex(headerLineParts, "lot"),
+                LatIndex = FindHeaderCellIndex(headerLineParts, "lat"),
+                SubjectIndex = FindHeaderCellIndex(headerLineParts, "subject"),
+                LocationIndex = FindHeaderCellIndex(headerLineParts, "location"), 
+                RasterIndex = FindHeaderCellIndex(headerLineParts, "raster"),
+                AdressIndex = FindHeaderCellIndex(headerLineParts, "address"), 
+                GenerationIndex = FindHeaderCellIndex(headerLineParts, "generation"),
+                HeightIndex = FindHeaderCellIndex(headerLineParts, "height"),
+                TiltIndex = FindHeaderCellIndex(headerLineParts, "tilt"),
+                AzimuthIndex = FindHeaderCellIndex(headerLineParts, "Azimuth"),
+                FrequencyIndex = FindHeaderCellIndex(headerLineParts, "frequency"),
                 //  TODO add other props
                 //  MCC;MNC;LAC;CELL;RAC;LON;LAT;SUBJECT;DATE_ON;DATE_OFF;AZIMUTH;HEIGHT;TILT;RASTER;THICKNESS;FREQUENCY;POWER;AMPLIFICATION;BORDER;LOCATION;ADDRESS;GENERATION;CONTROLLER_NUM
             };
