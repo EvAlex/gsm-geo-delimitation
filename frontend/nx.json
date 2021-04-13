@@ -24,6 +24,8 @@
     "delimitator": { "tags": [] },
     "delimitator-e2e": { "tags": [], "implicitDependencies": ["delimitator"] },
     "navigation-shell": { "tags": [] },
-    "navigation-feature-navbar": { "tags": [] }
+    "navigation-feature-navbar": { "tags": [] },
+    "delimitation-shell": { "tags": [] },
+    "delimitation-feature-delimitation": { "tags": [] }
   }
 }
