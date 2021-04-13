@@ -3,5 +3,7 @@ module.exports = {
     '<rootDir>/apps/delimitator',
     '<rootDir>/libs/navigation/shell',
     '<rootDir>/libs/navigation/feature-navbar',
+    '<rootDir>/libs/delimitation/shell',
+    '<rootDir>/libs/delimitation/feature-delimitation',
   ],
 };

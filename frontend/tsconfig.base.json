@@ -20,6 +20,12 @@
       ],
       "@gsm-geo-delimitation/navigation/feature-navbar": [
         "libs/navigation/feature-navbar/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/delimitation/shell": [
+        "libs/delimitation/shell/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/delimitation/feature-delimitation": [
+        "libs/delimitation/feature-delimitation/src/index.ts"
       ]
     }
   },

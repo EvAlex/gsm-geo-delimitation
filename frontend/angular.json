@@ -198,6 +198,56 @@
           }
         }
       }
+    },
+    "delimitation-shell": {
+      "projectType": "library",
+      "root": "libs/delimitation/shell",
+      "sourceRoot": "libs/delimitation/shell/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/delimitation/shell/src/**/*.ts",
+              "libs/delimitation/shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delimitation/shell"],
+          "options": {
+            "jestConfig": "libs/delimitation/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "delimitation-feature-delimitation": {
+      "projectType": "library",
+      "root": "libs/delimitation/feature-delimitation",
+      "sourceRoot": "libs/delimitation/feature-delimitation/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/delimitation/feature-delimitation/src/**/*.ts",
+              "libs/delimitation/feature-delimitation/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delimitation/feature-delimitation"],
+          "options": {
+            "jestConfig": "libs/delimitation/feature-delimitation/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
