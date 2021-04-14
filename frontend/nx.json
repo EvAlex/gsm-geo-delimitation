@@ -26,6 +26,7 @@
     "navigation-shell": { "tags": [] },
     "navigation-feature-navbar": { "tags": [] },
     "delimitation-shell": { "tags": [] },
-    "delimitation-feature-delimitation": { "tags": [] }
+    "delimitation-feature-delimitation": { "tags": [] },
+    "delimitation-ui-map": { "tags": [] }
   }
 }

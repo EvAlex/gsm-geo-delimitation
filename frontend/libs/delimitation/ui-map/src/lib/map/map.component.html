@@ -1,0 +1,21 @@
+<ng-container *ngIf="noKey$ | async; else keyExists">
+  <p>Задайте API ключ для библиотеки работы с Google Maps</p>
+
+  <mat-form-field>
+    <mat-label>API ключ</mat-label>
+    <input matInput type="password" [formControl]="apiKeyControl" />
+  </mat-form-field>
+
+  <button mat-button (click)="saveApiKey()">Сохранить</button>
+</ng-container>
+
+<ng-template #keyExists>
+    <div *ngIf="apiLoaded$ | async; else apiFailedToLoad">
+      <google-map [options]="options"></google-map>
+    </div>
+    
+    <ng-template #apiFailedToLoad>
+      <p>Не удалось загрузить библиотеку для работы с Google Maps</p>
+    </ng-template>
+</ng-template>
+
