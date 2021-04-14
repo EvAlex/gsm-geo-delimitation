@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/navigation/feature-navbar',
     '<rootDir>/libs/delimitation/shell',
     '<rootDir>/libs/delimitation/feature-delimitation',
+    '<rootDir>/libs/delimitation/ui-map',
   ],
 };
