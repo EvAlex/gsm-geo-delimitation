@@ -1,0 +1,15 @@
+:host {
+  display: block;
+
+  mat-form-field {
+    display: block;
+  }
+
+  section {
+    display: flex;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+}
