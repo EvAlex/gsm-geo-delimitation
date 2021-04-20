@@ -11,7 +11,7 @@
 
 <ng-template #keyExists>
     <div *ngIf="apiLoaded$ | async; else apiFailedToLoad">
-      <google-map [options]="options"></google-map>
+      <google-map [width]="null" [options]="options"></google-map>
     </div>
     
     <ng-template #apiFailedToLoad>
