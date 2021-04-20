@@ -17,4 +17,21 @@
   <mat-label>Время окончания</mat-label>
   <input matInput type="time" />
 </mat-form-field>
-<section></section>
+
+<mat-form-field appearance="fill">
+  <mat-label>Территория</mat-label>
+  <mat-chip-list #chipList aria-label="Координаты территории" (chipSelectionChanges)="onPointSelected(null, null, $event)">
+    <mat-chip
+      *ngFor="let point of form.value.areaBoundary; index as index"
+      [selectable]="true"
+      [removable]="true"
+      (removed)="removePoint(point, index)"
+      (selectionChange)="onPointSelected(point, index, $event.selected)"
+    >
+      lat: {{ point.lat }}, lng: {{ point.lng }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+
+<button mat-button>Выбрать территорию</button>
