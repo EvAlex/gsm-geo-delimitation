@@ -27,6 +27,7 @@
     "navigation-feature-navbar": { "tags": [] },
     "delimitation-shell": { "tags": [] },
     "delimitation-feature-delimitation": { "tags": [] },
-    "delimitation-ui-map": { "tags": [] }
+    "delimitation-ui-map": { "tags": [] },
+    "shared-util-geolocation": { "tags": [] }
   }
 }

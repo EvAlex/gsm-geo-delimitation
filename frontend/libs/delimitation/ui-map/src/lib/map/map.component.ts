@@ -1,8 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { mapTo, catchError, switchMap, map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 
 const API_KEY = 'Google Maps API KEY';
 
@@ -34,6 +41,20 @@ export class MapComponent {
   readonly options: google.maps.MapOptions = {
     center: { lat: 55.755833, lng: 37.617222 },
     zoom: 12,
+    clickableIcons: false,
+  };
+
+  @Input()
+  readonly isAreaSelectMode: boolean;
+
+  @Input()
+  areaBoundary: GeoPoint[];
+
+  @Output()
+  readonly areaBoundaryChange = new EventEmitter<GeoPoint[]>();
+
+  readonly areaBoundaryMarkerOptions: google.maps.MarkerOptions = {
+    draggable: false,
   };
 
   constructor(private readonly httpClient: HttpClient) {}
@@ -44,5 +65,12 @@ export class MapComponent {
     localStorage.setItem(API_KEY, key);
 
     this.refreshKey$.next(0);
+  }
+
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (this.isAreaSelectMode) {
+      this.areaBoundary = this.areaBoundary.concat([event.latLng.toJSON()]);
+      this.areaBoundaryChange.emit(this.areaBoundary);
+    }
   }
 }
