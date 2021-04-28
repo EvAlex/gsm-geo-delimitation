@@ -20,13 +20,14 @@
 
 <mat-form-field appearance="fill">
   <mat-label>Территория</mat-label>
-  <mat-chip-list #chipList aria-label="Координаты территории" (chipSelectionChanges)="onPointSelected(null, null, $event)">
+  <mat-chip-list #chipList aria-label="Координаты территории">
     <mat-chip
       *ngFor="let point of form.value.areaBoundary; index as index"
       [selectable]="true"
       [removable]="true"
-      (removed)="removePoint(point, index)"
-      (selectionChange)="onPointSelected(point, index, $event.selected)"
+      [selected]="isPointSelected(index)"
+      (removed)="removePoint(index)"
+      (click)="selectPoint(index)"
     >
       lat: {{ point.lat }}, lng: {{ point.lng }}
       <mat-icon matChipRemove>cancel</mat-icon>
@@ -34,4 +35,6 @@
   </mat-chip-list>
 </mat-form-field>
 
-<button mat-button>Выбрать территорию</button>
+<button *ngIf="!isAreaSelectMode" mat-button (click)="toggleAreaSelectMode()">Выбрать территорию</button>
+
+<button *ngIf="isAreaSelectMode" mat-button (click)="toggleAreaSelectMode()">Закончить выбор территории</button>

@@ -33,6 +33,11 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   readonly form: FormGroup;
 
+  isAreaSelectMode = false;
+
+  @Input()
+  selectedPointIndex: number;
+
   @Input()
   set value(value: SearchFormValue) {
     this.form.setValue(value, { emitEvent: false });
@@ -40,6 +45,12 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   @Output()
   readonly valueChange = new EventEmitter<SearchFormValue>();
+
+  @Output()
+  readonly selectedPointIndexChange = new EventEmitter<number>();
+
+  @Output()
+  readonly isAreaSelectModeChange = new EventEmitter<boolean>();
 
   constructor(fb: FormBuilder) {
     this.form = fb.group({
@@ -65,11 +76,26 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     this.destroy$.next();
   }
 
-  removePoint(point, index) {
-    debugger;
+  removePoint(index: number) {
+    const currentvalue: SearchFormValue = this.form.value;
+    const patch: Partial<SearchFormValue> = {
+      areaBoundary: currentvalue.areaBoundary.filter((_, i) => i !== index),
+    };
+
+    this.form.patchValue(patch);
   }
 
-  onPointSelected(point, index, isSelected) {
-    debugger;
+  selectPoint(index: number) {
+    this.selectedPointIndex = index;
+    this.selectedPointIndexChange.emit(index);
+  }
+
+  isPointSelected(index: number): boolean {
+    return index === this.selectedPointIndex;
+  }
+
+  toggleAreaSelectMode() {
+    this.isAreaSelectMode = !this.isAreaSelectMode;
+    this.isAreaSelectModeChange.emit(this.isAreaSelectMode);
   }
 }
