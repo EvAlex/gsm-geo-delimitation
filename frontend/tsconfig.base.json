@@ -29,6 +29,9 @@
       ],
       "@gsm-geo-delimitation/delimitation/ui-map": [
         "libs/delimitation/ui-map/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/shared/util-geolocation": [
+        "libs/shared/util-geolocation/src/index.ts"
       ]
     }
   },

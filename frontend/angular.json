@@ -273,6 +273,31 @@
           }
         }
       }
+    },
+    "shared-util-geolocation": {
+      "projectType": "library",
+      "root": "libs/shared/util-geolocation",
+      "sourceRoot": "libs/shared/util-geolocation/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/util-geolocation/src/**/*.ts",
+              "libs/shared/util-geolocation/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-geolocation"],
+          "options": {
+            "jestConfig": "libs/shared/util-geolocation/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

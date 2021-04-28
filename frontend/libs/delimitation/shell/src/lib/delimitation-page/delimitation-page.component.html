@@ -1,5 +1,12 @@
 <div class="container">
-    <gsm-geo-delimitation-map></gsm-geo-delimitation-map>
+    <gsm-geo-delimitation-map 
+        [isAreaSelectMode]="isAreaSelectMode"
+        [areaBoundary]="searchFormValue.areaBoundary"
+        (areaBoundaryChange)="onAreaBoundaryChange($event)"
+    ></gsm-geo-delimitation-map>
     
-    <gsm-geo-delimitation-search-form></gsm-geo-delimitation-search-form>
+    <gsm-geo-delimitation-search-form
+        [(value)]="searchFormValue"
+        (isAreaSelectModeChange)="isAreaSelectMode = $event"
+    ></gsm-geo-delimitation-search-form>
 </div>

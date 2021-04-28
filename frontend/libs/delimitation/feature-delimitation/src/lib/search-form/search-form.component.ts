@@ -10,13 +10,9 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 
-type GeoPoint = {
-  lat: number;
-  lng: number;
-};
-
-type SearchFormValue = {
+export type SearchFormValue = {
   dateFrom: Date;
   dateTo: Date;
   areaBoundary: GeoPoint[];

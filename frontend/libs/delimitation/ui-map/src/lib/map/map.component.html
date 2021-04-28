@@ -10,12 +10,22 @@
 </ng-container>
 
 <ng-template #keyExists>
-    <div *ngIf="apiLoaded$ | async; else apiFailedToLoad">
-      <google-map [width]="null" [options]="options"></google-map>
-    </div>
-    
-    <ng-template #apiFailedToLoad>
-      <p>Не удалось загрузить библиотеку для работы с Google Maps</p>
-    </ng-template>
-</ng-template>
+  <div *ngIf="apiLoaded$ | async; else apiFailedToLoad">
+    <google-map 
+      [width]="null" 
+      [options]="options"
+      (mapClick)="onMapClick($event)"
+    >
+      <map-marker
+        *ngFor="let point of areaBoundary"
+        [position]="point"
+        [options]="areaBoundaryMarkerOptions"
+      ></map-marker>
+      <map-polygon [paths]="areaBoundary"></map-polygon>
+    </google-map>
+  </div>
 
+  <ng-template #apiFailedToLoad>
+    <p>Не удалось загрузить библиотеку для работы с Google Maps</p>
+  </ng-template>
+</ng-template>
