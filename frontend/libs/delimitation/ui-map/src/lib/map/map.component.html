@@ -20,7 +20,7 @@
         *ngFor="let point of areaMarkerPoints; index as i"
         #marker="mapMarker"
         [position]="point"
-        [options]="areaBoundaryMarkerOptions"
+        [options]="areaBoundaryMarkerOptions[i]"
         (positionChanged)="onAreaBoundaryMarkerPositionChanged(marker.getPosition().toJSON(), i)"
         (mapDragend)="onAreaBoundaryMarkerDragEnd()"
       ></map-marker>
