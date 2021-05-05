@@ -47,14 +47,30 @@ export class MapComponent {
   @Input()
   readonly isAreaSelectMode: boolean;
 
+  areaMarkerPoints: GeoPoint[];
+
+  areaPolygonPoints: GeoPoint[];
+
   @Input()
-  areaBoundary: GeoPoint[];
+  set areaBoundary(points: GeoPoint[]) {
+    this.areaMarkerPoints = points.slice();
+    this.areaPolygonPoints = points.slice();
+  }
 
   @Output()
   readonly areaBoundaryChange = new EventEmitter<GeoPoint[]>();
 
   readonly areaBoundaryMarkerOptions: google.maps.MarkerOptions = {
-    draggable: false,
+    draggable: true,
+  };
+
+  readonly areaPolygonOptions: google.maps.PolygonOptions = {
+    strokeWeight: 1,
+    strokeColor: '#673ab7',
+    strokeOpacity: 0.82,
+    fillColor: '#673ab7',
+    fillOpacity: 0.32,
+    clickable: false,
   };
 
   constructor(private readonly httpClient: HttpClient) {}
@@ -69,8 +85,22 @@ export class MapComponent {
 
   onMapClick(event: google.maps.MapMouseEvent) {
     if (this.isAreaSelectMode) {
-      this.areaBoundary = this.areaBoundary.concat([event.latLng.toJSON()]);
-      this.areaBoundaryChange.emit(this.areaBoundary);
+      this.areaMarkerPoints = this.areaMarkerPoints.concat([
+        event.latLng.toJSON(),
+      ]);
+      this.areaPolygonPoints = this.areaMarkerPoints.slice();
+      this.areaBoundaryChange.emit(this.areaMarkerPoints);
     }
+  }
+
+  onAreaBoundaryMarkerPositionChanged(value: GeoPoint, index: number) {
+    this.areaPolygonPoints = this.areaPolygonPoints.map((e, i) =>
+      i === index ? value : e
+    );
+  }
+
+  onAreaBoundaryMarkerDragEnd() {
+    this.areaMarkerPoints = this.areaPolygonPoints.slice();
+    this.areaBoundaryChange.emit(this.areaMarkerPoints);
   }
 }
