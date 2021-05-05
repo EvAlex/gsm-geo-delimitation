@@ -55,14 +55,13 @@ export class MapComponent {
   set areaBoundary(points: GeoPoint[]) {
     this.areaMarkerPoints = points.slice();
     this.areaPolygonPoints = points.slice();
+    this.updateMarkerOptions();
   }
 
   @Output()
   readonly areaBoundaryChange = new EventEmitter<GeoPoint[]>();
 
-  readonly areaBoundaryMarkerOptions: google.maps.MarkerOptions = {
-    draggable: true,
-  };
+  areaBoundaryMarkerOptions: google.maps.MarkerOptions[];
 
   readonly areaPolygonOptions: google.maps.PolygonOptions = {
     strokeWeight: 1,
@@ -89,6 +88,7 @@ export class MapComponent {
         event.latLng.toJSON(),
       ]);
       this.areaPolygonPoints = this.areaMarkerPoints.slice();
+      this.updateMarkerOptions();
       this.areaBoundaryChange.emit(this.areaMarkerPoints);
     }
   }
@@ -102,5 +102,19 @@ export class MapComponent {
   onAreaBoundaryMarkerDragEnd() {
     this.areaMarkerPoints = this.areaPolygonPoints.slice();
     this.areaBoundaryChange.emit(this.areaMarkerPoints);
+  }
+
+  getMarkerOptions(index: number) {
+    return {
+      ...this.areaBoundaryMarkerOptions,
+      label: String(index + 1),
+    };
+  }
+
+  private updateMarkerOptions() {
+    this.areaBoundaryMarkerOptions = this.areaMarkerPoints.map((_, i) => ({
+      draggable: true,
+      label: String(i + 1),
+    }));
   }
 }
