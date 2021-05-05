@@ -17,11 +17,17 @@
       (mapClick)="onMapClick($event)"
     >
       <map-marker
-        *ngFor="let point of areaBoundary"
+        *ngFor="let point of areaMarkerPoints; index as i"
+        #marker="mapMarker"
         [position]="point"
         [options]="areaBoundaryMarkerOptions"
+        (positionChanged)="onAreaBoundaryMarkerPositionChanged(marker.getPosition().toJSON(), i)"
+        (mapDragend)="onAreaBoundaryMarkerDragEnd()"
       ></map-marker>
-      <map-polygon [paths]="areaBoundary"></map-polygon>
+      <map-polygon 
+        [options]="areaPolygonOptions"
+        [paths]="areaPolygonPoints"
+      ></map-polygon>
     </google-map>
   </div>
 
