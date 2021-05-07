@@ -17,6 +17,8 @@ export class DelimitationPageComponent implements OnInit {
 
   isAreaSelectMode: boolean;
 
+  selectedAreaBoundaryPointIndex: number;
+
   constructor() {}
 
   ngOnInit(): void {}
