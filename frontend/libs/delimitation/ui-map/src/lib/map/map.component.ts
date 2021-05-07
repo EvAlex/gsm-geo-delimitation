@@ -47,6 +47,17 @@ export class MapComponent {
   @Input()
   readonly isAreaSelectMode: boolean;
 
+  private _selectedAreaBoundaryPointIndex: number;
+
+  @Input()
+  set selectedAreaBoundaryPointIndex(value: number) {
+    this._selectedAreaBoundaryPointIndex = value;
+    this.updateMarkerOptions();
+  }
+
+  @Output()
+  readonly selectedAreaBoundaryPointIndexChange = new EventEmitter<number>();
+
   areaMarkerPoints: GeoPoint[];
 
   areaPolygonPoints: GeoPoint[];
@@ -104,17 +115,45 @@ export class MapComponent {
     this.areaBoundaryChange.emit(this.areaMarkerPoints);
   }
 
-  getMarkerOptions(index: number) {
-    return {
-      ...this.areaBoundaryMarkerOptions,
-      label: String(index + 1),
-    };
+  onAreaBoundaryMarkerClick(index: number) {
+    this._selectedAreaBoundaryPointIndex = index;
+    this.selectedAreaBoundaryPointIndexChange.emit(index);
   }
 
   private updateMarkerOptions() {
-    this.areaBoundaryMarkerOptions = this.areaMarkerPoints.map((_, i) => ({
+    this.areaBoundaryMarkerOptions = this.areaMarkerPoints.map((_, i) =>
+      i === this._selectedAreaBoundaryPointIndex
+        ? this.createMarkerOptionsForSelected(i)
+        : this.createMarkerOptions(i)
+    );
+  }
+
+  private createMarkerOptions(index: number): google.maps.MarkerOptions {
+    return <google.maps.MarkerOptions>{
       draggable: true,
-      label: String(i + 1),
-    }));
+      clickable: true,
+      label: String(index + 1),
+      icon: undefined,
+    };
+  }
+
+  private createMarkerOptionsForSelected(
+    index: number
+  ): google.maps.MarkerOptions {
+    return <google.maps.MarkerOptions>{
+      draggable: true,
+      clickable: false,
+      label: <google.maps.MarkerLabel>{
+        text: String(index + 1),
+        color: 'white',
+      },
+      icon: <google.maps.Icon>{
+        url: '/assets/marker-selected.png',
+        scaledSize: new google.maps.Size(27, 43),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(14, 43),
+        labelOrigin: new google.maps.Point(14, 15),
+      },
+    };
   }
 }

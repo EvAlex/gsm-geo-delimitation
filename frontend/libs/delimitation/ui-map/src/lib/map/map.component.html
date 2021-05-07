@@ -23,6 +23,7 @@
         [options]="areaBoundaryMarkerOptions[i]"
         (positionChanged)="onAreaBoundaryMarkerPositionChanged(marker.getPosition().toJSON(), i)"
         (mapDragend)="onAreaBoundaryMarkerDragEnd()"
+        (mapClick)="onAreaBoundaryMarkerClick(i)"
       ></map-marker>
       <map-polygon 
         [options]="areaPolygonOptions"

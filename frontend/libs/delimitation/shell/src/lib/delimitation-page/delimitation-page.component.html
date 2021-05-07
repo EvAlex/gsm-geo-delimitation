@@ -3,10 +3,12 @@
         [isAreaSelectMode]="isAreaSelectMode"
         [areaBoundary]="searchFormValue.areaBoundary"
         (areaBoundaryChange)="onAreaBoundaryChange($event)"
+        [(selectedAreaBoundaryPointIndex)]="selectedAreaBoundaryPointIndex"
     ></gsm-geo-delimitation-map>
     
     <gsm-geo-delimitation-search-form
         [(value)]="searchFormValue"
+        [(selectedPointIndex)]="selectedAreaBoundaryPointIndex"
         (isAreaSelectModeChange)="isAreaSelectMode = $event"
     ></gsm-geo-delimitation-search-form>
 </div>
