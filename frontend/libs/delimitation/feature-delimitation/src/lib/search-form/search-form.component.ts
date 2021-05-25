@@ -29,6 +29,11 @@ export type SearchFormValue = {
 export class SearchFormComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
 
+  /**
+   * Datepicker from `@angular/material` incorrectly respond to programmatic form value update
+   */
+  private isSettingValueFromInput = false;
+
   readonly form: FormGroup;
 
   readonly dateFrom = new FormControl();
@@ -46,7 +51,9 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   @Input()
   set value(value: SearchFormValue) {
+    this.isSettingValueFromInput = true;
     this.form.setValue(value, { emitEvent: false });
+    this.isSettingValueFromInput = false;
   }
 
   @Output()
@@ -76,7 +83,10 @@ export class SearchFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.form.valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        filter(() => !this.isSettingValueFromInput),
+        takeUntil(this.destroy$)
+      )
       .subscribe((value) => this.valueChange.next(value));
   }
 
