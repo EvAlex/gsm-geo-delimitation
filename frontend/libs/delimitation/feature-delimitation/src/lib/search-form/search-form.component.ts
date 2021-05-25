@@ -7,14 +7,16 @@ import {
   EventEmitter,
   OnDestroy,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 
 export type SearchFormValue = {
   dateFrom: Date;
   dateTo: Date;
+  timeFrom: string;
+  timeTo: string;
   areaBoundary: GeoPoint[];
 };
 
@@ -28,6 +30,14 @@ export class SearchFormComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject();
 
   readonly form: FormGroup;
+
+  readonly dateFrom = new FormControl();
+
+  readonly dateTo = new FormControl();
+
+  readonly timeFrom = new FormControl();
+
+  readonly timeTo = new FormControl();
 
   isAreaSelectMode = false;
 
@@ -52,6 +62,8 @@ export class SearchFormComponent implements OnInit, OnDestroy {
     this.form = fb.group({
       dateFrom: [],
       dateTo: [],
+      timeFrom: [],
+      timeTo: [],
       areaBoundary: [
         [
           { lat: 3, lng: 4 },
