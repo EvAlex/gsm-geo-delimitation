@@ -7,12 +7,14 @@ import { SearchFormComponent } from './search-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SearchFormComponent],
   exports: [SearchFormComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatDatepickerModule,
     MatInputModule,

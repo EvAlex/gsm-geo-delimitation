@@ -28,6 +28,7 @@
     "delimitation-shell": { "tags": [] },
     "delimitation-feature-delimitation": { "tags": [] },
     "delimitation-ui-map": { "tags": [] },
-    "shared-util-geolocation": { "tags": [] }
+    "shared-util-geolocation": { "tags": [] },
+    "geo-search-data-access": { "tags": [] }
   }
 }

@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/libs/delimitation/feature-delimitation',
     '<rootDir>/libs/delimitation/ui-map',
     '<rootDir>/libs/shared/util-geolocation',
+    '<rootDir>/libs/geo-search/data-access',
   ],
 };

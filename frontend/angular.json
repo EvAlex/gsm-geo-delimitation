@@ -298,6 +298,31 @@
           }
         }
       }
+    },
+    "geo-search-data-access": {
+      "projectType": "library",
+      "root": "libs/geo-search/data-access",
+      "sourceRoot": "libs/geo-search/data-access/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/geo-search/data-access/src/**/*.ts",
+              "libs/geo-search/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/geo-search/data-access"],
+          "options": {
+            "jestConfig": "libs/geo-search/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationShellModule } from '@gsm-geo-delimitation/navigation/shell';
 import { AppRoutingModule } from './app-routing.module';
 import { MatNativeDateModule } from '@angular/material/core';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     NavigationShellModule,
     AppRoutingModule,
     MatNativeDateModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
