@@ -1,18 +1,7 @@
-<ng-container *ngIf="noKey$ | async; else keyExists">
-  <p>Задайте API ключ для библиотеки работы с Google Maps</p>
-
-  <mat-form-field>
-    <mat-label>API ключ</mat-label>
-    <input matInput type="password" [formControl]="apiKeyControl" />
-  </mat-form-field>
-
-  <button mat-button (click)="saveApiKey()">Сохранить</button>
-</ng-container>
-
-<ng-template #keyExists>
-  <div *ngIf="apiLoaded$ | async; else apiFailedToLoad">
-    <google-map 
-      [width]="null" 
+<gsm-geo-delimitation-map-loader>
+  <ng-template>
+    <google-map
+      [width]="null"
       [options]="options"
       (mapClick)="onMapClick($event)"
     >
@@ -21,25 +10,23 @@
         #marker="mapMarker"
         [position]="point"
         [options]="areaBoundaryMarkerOptions[i]"
-        (positionChanged)="onAreaBoundaryMarkerPositionChanged(marker.getPosition().toJSON(), i)"
+        (positionChanged)="
+          onAreaBoundaryMarkerPositionChanged(marker.getPosition().toJSON(), i)
+        "
         (mapDragend)="onAreaBoundaryMarkerDragEnd()"
         (mapClick)="onAreaBoundaryMarkerClick(i)"
       ></map-marker>
-      <map-polygon 
+      <map-polygon
         [options]="areaPolygonOptions"
         [paths]="areaPolygonPoints"
       ></map-polygon>
 
-      <ng-container *ngFor="let track of (tracks || [])">
-        <map-polyline 
+      <ng-container *ngFor="let track of tracks || []">
+        <map-polyline
           [options]="tracksOptions"
           [path]="track || []"
         ></map-polyline>
       </ng-container>
     </google-map>
-  </div>
-
-  <ng-template #apiFailedToLoad>
-    <p>Не удалось загрузить библиотеку для работы с Google Maps</p>
   </ng-template>
-</ng-template>
+</gsm-geo-delimitation-map-loader>
