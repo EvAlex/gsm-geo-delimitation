@@ -35,6 +35,9 @@
       ],
       "@gsm-geo-delimitation/geo-search/data-access": [
         "libs/geo-search/data-access/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/geo-search/feature-mock-gsm-tracks": [
+        "libs/geo-search/feature-mock-gsm-tracks/src/index.ts"
       ]
     }
   },

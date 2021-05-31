@@ -323,6 +323,29 @@
           }
         }
       }
+    },
+    "geo-search-feature-mock-gsm-tracks": {
+      "root": "libs/geo-search/feature-mock-gsm-tracks",
+      "sourceRoot": "libs/geo-search/feature-mock-gsm-tracks/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/geo-search/feature-mock-gsm-tracks/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/geo-search/feature-mock-gsm-tracks"],
+          "options": {
+            "jestConfig": "libs/geo-search/feature-mock-gsm-tracks/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
