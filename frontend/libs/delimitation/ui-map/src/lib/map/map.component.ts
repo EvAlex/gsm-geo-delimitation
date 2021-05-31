@@ -58,6 +58,15 @@ export class MapComponent {
   @Output()
   readonly selectedAreaBoundaryPointIndexChange = new EventEmitter<number>();
 
+  @Input()
+  readonly tracks: GeoPoint[][];
+
+  readonly tracksOptions: google.maps.PolylineOptions = {
+    strokeWeight: 2,
+    strokeColor: '#673ab7',
+    // strokeOpacity: 0.82,
+  };
+
   areaMarkerPoints: GeoPoint[];
 
   areaPolygonPoints: GeoPoint[];
