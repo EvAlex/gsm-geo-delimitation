@@ -4,6 +4,7 @@ import { DelimitationPageComponent } from './delimitation-page.component';
 import { DelimitationUiMapModule } from '@gsm-geo-delimitation/delimitation/ui-map';
 import { DelimitationFeatureDelimitationModule } from '@gsm-geo-delimitation/delimitation/feature-delimitation';
 import { GeoSearchDataAccessModule } from '@gsm-geo-delimitation/geo-search/data-access';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [DelimitationPageComponent],
@@ -13,6 +14,7 @@ import { GeoSearchDataAccessModule } from '@gsm-geo-delimitation/geo-search/data
     DelimitationUiMapModule,
     DelimitationFeatureDelimitationModule,
     GeoSearchDataAccessModule,
+    MatButtonModule,
   ],
 })
 export class DelimitationPageModule {}

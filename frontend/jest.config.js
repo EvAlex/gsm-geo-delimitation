@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/delimitation/ui-map',
     '<rootDir>/libs/shared/util-geolocation',
     '<rootDir>/libs/geo-search/data-access',
+    '<rootDir>/libs/geo-search/feature-mock-gsm-tracks',
   ],
 };
