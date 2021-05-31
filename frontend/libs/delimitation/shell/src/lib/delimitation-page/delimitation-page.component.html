@@ -4,6 +4,7 @@
         [areaBoundary]="searchFormValue.areaBoundary"
         (areaBoundaryChange)="onAreaBoundaryChange($event)"
         [(selectedAreaBoundaryPointIndex)]="selectedAreaBoundaryPointIndex"
+        [tracks]="tracks$ | async"
     ></gsm-geo-delimitation-map>
 
     <aside>

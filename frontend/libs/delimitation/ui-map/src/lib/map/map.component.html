@@ -29,6 +29,13 @@
         [options]="areaPolygonOptions"
         [paths]="areaPolygonPoints"
       ></map-polygon>
+
+      <ng-container *ngFor="let track of (tracks || [])">
+        <map-polyline 
+          [options]="tracksOptions"
+          [path]="track || []"
+        ></map-polyline>
+      </ng-container>
     </google-map>
   </div>
 

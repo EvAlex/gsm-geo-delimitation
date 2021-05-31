@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SearchFormValue } from '@gsm-geo-delimitation/delimitation/feature-delimitation';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 import { GeoSearchDataAccessService } from '@gsm-geo-delimitation/geo-search/data-access';
+import { Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'gsm-geo-delimitation-delimitation-page',
@@ -10,6 +12,8 @@ import { GeoSearchDataAccessService } from '@gsm-geo-delimitation/geo-search/dat
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DelimitationPageComponent implements OnInit {
+  private readonly submitSearch$ = new Subject();
+
   searchFormValue: SearchFormValue = {
     dateFrom: null,
     dateTo: null,
@@ -17,6 +21,15 @@ export class DelimitationPageComponent implements OnInit {
     timeTo: null,
     areaBoundary: [],
   };
+
+  tracks$ = this.submitSearch$.pipe(
+    switchMap(() =>
+      this.searchDataAccess.queryTracks({
+        ...this.searchFormValue,
+      })
+    ),
+    map((tracks) => tracks.map((track) => track.points))
+  );
 
   isAreaSelectMode: boolean;
 
@@ -34,10 +47,6 @@ export class DelimitationPageComponent implements OnInit {
   }
 
   submitSearch() {
-    this.searchDataAccess
-      .queryTracks({
-        ...this.searchFormValue,
-      })
-      .subscribe();
+    this.submitSearch$.next();
   }
 }
