@@ -40,6 +40,9 @@ export class MapComponent {
   @Input()
   tracks: GeoPoint[][];
 
+  @Output()
+  readonly tracksChange = new EventEmitter<GeoPoint[][]>();
+
   readonly tracksOptions: google.maps.PolylineOptions = {
     strokeWeight: 2,
     strokeColor: '#673ab7',
@@ -80,7 +83,7 @@ export class MapComponent {
       this.updateMarkerOptions();
       this.areaBoundaryChange.emit(this.areaMarkerPoints);
     } else if (this.isTrackDrawMode) {
-      if (this.tracks?.length || 0 === 0) {
+      if ((this.tracks?.length || 0) === 0) {
         this.tracks = [[]];
       }
 
@@ -89,6 +92,7 @@ export class MapComponent {
       this.tracks[this.tracks.length - 1] = lastTrack.concat([
         event.latLng.toJSON(),
       ]);
+      this.tracksChange.emit(this.tracks);
     }
   }
 

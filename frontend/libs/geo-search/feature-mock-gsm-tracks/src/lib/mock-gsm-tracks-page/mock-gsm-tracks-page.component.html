@@ -1,1 +1,12 @@
-<p>mock-gsm-tracks-page works!</p>
+<main>
+    <gsm-geo-delimitation-map 
+        [isTrackDrawMode]="true"
+        [(tracks)]="tracks"
+    ></gsm-geo-delimitation-map>
+
+    <aside>
+        <button mat-button color="primary" (click)="addTrack()">Добавить трек</button>
+
+        <tracks-list [(tracks)]="tracks"></tracks-list>
+    </aside>
+</main>

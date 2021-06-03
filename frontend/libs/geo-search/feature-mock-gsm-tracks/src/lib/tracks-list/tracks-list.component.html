@@ -1,0 +1,7 @@
+<mat-selection-list [multiple]= "false">
+    <mat-list-option 
+        *ngFor="let track of tracks || []; index as i"
+    >
+        Трек №{{i + 1}}
+    </mat-list-option>
+</mat-selection-list>
