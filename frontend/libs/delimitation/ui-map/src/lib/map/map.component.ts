@@ -23,6 +23,9 @@ export class MapComponent {
   @Input()
   readonly isAreaSelectMode: boolean;
 
+  @Input()
+  readonly isTrackDrawMode: boolean;
+
   private _selectedAreaBoundaryPointIndex: number;
 
   @Input()
@@ -35,7 +38,7 @@ export class MapComponent {
   readonly selectedAreaBoundaryPointIndexChange = new EventEmitter<number>();
 
   @Input()
-  readonly tracks: GeoPoint[][];
+  tracks: GeoPoint[][];
 
   readonly tracksOptions: google.maps.PolylineOptions = {
     strokeWeight: 2,
@@ -76,6 +79,16 @@ export class MapComponent {
       this.areaPolygonPoints = this.areaMarkerPoints.slice();
       this.updateMarkerOptions();
       this.areaBoundaryChange.emit(this.areaMarkerPoints);
+    } else if (this.isTrackDrawMode) {
+      if (this.tracks?.length || 0 === 0) {
+        this.tracks = [[]];
+      }
+
+      const lastTrack = this.tracks[this.tracks.length - 1];
+
+      this.tracks[this.tracks.length - 1] = lastTrack.concat([
+        event.latLng.toJSON(),
+      ]);
     }
   }
 

@@ -1,1 +1,1 @@
-export * from './lib/geo-search-feature-mock-gsm-tracks';
+export * from './lib/geo-search-feature-mock-gsm-tracks.module';
