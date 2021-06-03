@@ -346,6 +346,31 @@
           }
         }
       }
+    },
+    "geo-search-shell": {
+      "projectType": "library",
+      "root": "libs/geo-search/shell",
+      "sourceRoot": "libs/geo-search/shell/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/geo-search/shell/src/**/*.ts",
+              "libs/geo-search/shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/geo-search/shell"],
+          "options": {
+            "jestConfig": "libs/geo-search/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

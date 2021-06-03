@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/shared/util-geolocation',
     '<rootDir>/libs/geo-search/data-access',
     '<rootDir>/libs/geo-search/feature-mock-gsm-tracks',
+    '<rootDir>/libs/geo-search/shell',
   ],
 };

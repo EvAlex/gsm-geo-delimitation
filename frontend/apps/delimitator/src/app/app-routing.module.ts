@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.DelimitationShellModule
       ),
   },
+  {
+    path: 'geo-search',
+    loadChildren: () =>
+      import('@gsm-geo-delimitation/geo-search/shell').then(
+        (m) => m.GeoSearchShellModule
+      ),
+  },
 ];
 
 @NgModule({
