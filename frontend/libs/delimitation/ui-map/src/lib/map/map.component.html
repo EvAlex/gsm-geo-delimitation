@@ -18,7 +18,7 @@
       ></map-marker>
       <map-polygon
         [options]="areaPolygonOptions"
-        [paths]="areaPolygonPoints"
+        [paths]="areaPolygonPoints || []"
       ></map-polygon>
 
       <ng-container *ngFor="let track of tracks || []">
