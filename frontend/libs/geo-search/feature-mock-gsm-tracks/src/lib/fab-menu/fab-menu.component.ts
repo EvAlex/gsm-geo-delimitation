@@ -13,8 +13,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FabMenuComponent {
+  @Output()
+  readonly saveTracks = new EventEmitter();
+
   @Input()
-  readonly displayRemoveTrack: boolean;
+  readonly canRemoveTrack: boolean;
 
   @Output()
   readonly addTrack = new EventEmitter();

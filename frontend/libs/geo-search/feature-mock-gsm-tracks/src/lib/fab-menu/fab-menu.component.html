@@ -1,5 +1,13 @@
 <button
   mat-fab
+  matTooltip="Сохранить"
+  (click)="saveTracks.emit()"
+>
+  <mat-icon>save</mat-icon>
+</button>
+
+<button
+  mat-fab
   color="accent"
   matTooltip="Добавить трек"
   (click)="addTrack.emit()"
@@ -11,7 +19,7 @@
   mat-fab
   color="primary"
   matTooltip="Удалить трек"
-  [style.visibility]="displayRemoveTrack ? 'visible': 'hidden'"
+  [disabled]="!canRemoveTrack"
   (click)="removeTrack.emit()"
 >
   <mat-icon>delete</mat-icon>

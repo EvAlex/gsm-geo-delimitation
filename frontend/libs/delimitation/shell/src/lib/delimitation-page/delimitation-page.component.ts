@@ -1,7 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Inject,
+} from '@angular/core';
 import { SearchFormValue } from '@gsm-geo-delimitation/delimitation/feature-delimitation';
+import {
+  GeoSearchDataAccess,
+  GEO_SEARCH_DATA_ACCESS,
+} from '@gsm-geo-delimitation/geo-search/data-access';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
-import { GeoSearchDataAccessService } from '@gsm-geo-delimitation/geo-search/data-access';
 import { Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -35,7 +43,10 @@ export class DelimitationPageComponent implements OnInit {
 
   selectedAreaBoundaryPointIndex: number;
 
-  constructor(private readonly searchDataAccess: GeoSearchDataAccessService) {}
+  constructor(
+    @Inject(GEO_SEARCH_DATA_ACCESS)
+    private readonly searchDataAccess: GeoSearchDataAccess
+  ) {}
 
   ngOnInit(): void {}
 

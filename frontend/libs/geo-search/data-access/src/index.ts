@@ -1,2 +1,3 @@
-export * from './lib/geo-search-data-access.service';
 export * from './lib/geo-search-data-access.module';
+export * from './lib/geo-search-data-access';
+export * from './lib/geo-search-data-access-mock';
