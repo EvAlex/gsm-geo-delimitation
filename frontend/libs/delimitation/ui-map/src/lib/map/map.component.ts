@@ -18,6 +18,7 @@ export class MapComponent {
     center: { lat: 55.755833, lng: 37.617222 },
     zoom: 12,
     clickableIcons: false,
+    disableDefaultUI: true,
   };
 
   @Input()
@@ -39,6 +40,9 @@ export class MapComponent {
 
   @Input()
   tracks: GeoPoint[][];
+
+  @Input()
+  selectedTrackIndex: number;
 
   @Output()
   readonly tracksChange = new EventEmitter<GeoPoint[][]>();
@@ -82,16 +86,13 @@ export class MapComponent {
       this.areaPolygonPoints = this.areaMarkerPoints.slice();
       this.updateMarkerOptions();
       this.areaBoundaryChange.emit(this.areaMarkerPoints);
-    } else if (this.isTrackDrawMode) {
-      if ((this.tracks?.length || 0) === 0) {
-        this.tracks = [[]];
-      }
+    } else if (this.isTrackDrawMode && (this.tracks?.length || 0 > 0)) {
+      const index =
+        this.selectedTrackIndex >= 0
+          ? this.selectedTrackIndex
+          : this.tracks.length - 1;
 
-      const lastTrack = this.tracks[this.tracks.length - 1];
-
-      this.tracks[this.tracks.length - 1] = lastTrack.concat([
-        event.latLng.toJSON(),
-      ]);
+      this.tracks[index] = this.tracks[index].concat([event.latLng.toJSON()]);
       this.tracksChange.emit(this.tracks);
     }
   }

@@ -1,0 +1,18 @@
+<button
+  mat-fab
+  color="accent"
+  matTooltip="Добавить трек"
+  (click)="addTrack.emit()"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<button
+  mat-fab
+  color="primary"
+  matTooltip="Удалить трек"
+  [style.visibility]="displayRemoveTrack ? 'visible': 'hidden'"
+  (click)="removeTrack.emit()"
+>
+  <mat-icon>delete</mat-icon>
+</button>

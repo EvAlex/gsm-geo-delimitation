@@ -1,12 +1,22 @@
 <main>
-    <gsm-geo-delimitation-map 
-        [isTrackDrawMode]="true"
+  <gsm-geo-delimitation-map
+    [isTrackDrawMode]="true"
+    [(tracks)]="tracks"
+    [selectedTrackIndex]="selectedTrackIndex"
+  ></gsm-geo-delimitation-map>
+
+  <aside>
+    <div class="scroll-container">
+      <tracks-list
         [(tracks)]="tracks"
-    ></gsm-geo-delimitation-map>
+        [(selectedTrackIndex)]="selectedTrackIndex"
+      ></tracks-list>
+    </div>
 
-    <aside>
-        <button mat-button color="primary" (click)="addTrack()">Добавить трек</button>
-
-        <tracks-list [(tracks)]="tracks"></tracks-list>
-    </aside>
+    <fab-menu
+      [displayRemoveTrack]="isTrackSelected"
+      (addTrack)="addTrack()"
+      (removeTrack)="removeTrack()"
+    ></fab-menu>
+  </aside>
 </main>
