@@ -14,7 +14,8 @@
     </div>
 
     <fab-menu
-      [displayRemoveTrack]="isTrackSelected"
+      (saveTracks)="saveTracks()"
+      [canRemoveTrack]="isTrackSelected"
       (addTrack)="addTrack()"
       (removeTrack)="removeTrack()"
     ></fab-menu>

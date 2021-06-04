@@ -1,5 +1,18 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Inject,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
+import {
+  GeoSearchDataAccessMock,
+  GEO_SEARCH_DATA_ACCESS,
+} from '@gsm-geo-delimitation/geo-search/data-access';
+import { combineLatest, timer } from 'rxjs';
+import { map, mapTo, startWith, takeWhile, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'mock-gsm-tracks-page',
@@ -7,13 +20,66 @@ import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
   styleUrls: ['./mock-gsm-tracks-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MockGsmTracksPageComponent {
+export class MockGsmTracksPageComponent implements OnInit {
   tracks: GeoPoint[][] = [];
 
   selectedTrackIndex: number = null;
 
   get isTrackSelected(): boolean {
     return this.selectedTrackIndex !== null;
+  }
+
+  constructor(
+    @Inject(GEO_SEARCH_DATA_ACCESS)
+    private readonly dataAccess: GeoSearchDataAccessMock,
+    private readonly snackbar: MatSnackBar,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
+    this.dataAccess
+      .queryTracks({
+        areaBoundary: [],
+        dateTo: null,
+        dateFrom: null,
+        timeFrom: null,
+        timeTo: null,
+      })
+      .pipe(map((tracks) => tracks.map((e) => e.points)))
+      .subscribe((tracks) => {
+        this.tracks = tracks;
+        this.changeDetector.markForCheck();
+      });
+  }
+
+  saveTracks() {
+    const save$ = this.dataAccess.saveTracks(
+      this.tracks.map((e) => ({ points: e }))
+    );
+
+    let loadingSnackbar: MatSnackBarRef<any>;
+
+    combineLatest([
+      timer(100).pipe(mapTo(true), startWith(false)),
+      save$.pipe(mapTo(true), startWith(false)),
+    ])
+      .pipe(
+        tap(([showInProgressDelayElapsed, saveComplete]) => {
+          if (showInProgressDelayElapsed && !saveComplete) {
+            loadingSnackbar = this.snackbar.open('Сохранение...');
+          } else if (saveComplete) {
+            if (loadingSnackbar) {
+              loadingSnackbar.dismiss();
+            }
+
+            this.snackbar.open('Сохранено', '', {
+              duration: 3_000,
+            });
+          }
+        }),
+        takeWhile(([_, saveComplete]) => !saveComplete)
+      )
+      .subscribe();
   }
 
   addTrack() {
@@ -28,8 +94,8 @@ export class MockGsmTracksPageComponent {
 
     this.selectedTrackIndex--;
 
-    if (this.selectedTrackIndex === -1 && this.tracks.length > 0) {
-      this.selectedTrackIndex = 0;
+    if (this.selectedTrackIndex === -1) {
+      this.selectedTrackIndex = this.tracks.length > 0 ? 0 : null;
     }
   }
 }
