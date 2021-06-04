@@ -11,13 +11,20 @@ main {
 }
 
 aside {
+  max-height: calc(100vh - 64px);
+  width: 240px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  max-height: calc(100vh - 64px);
 
-  tracks-list {
+  .scroll-container {
     flex: 1;
-    overflow: auto;
+    overflow: hidden;
+
+    tracks-list {
+      overflow: auto;
+      display: block;
+      height: 100%;
+    }
   }
 }
