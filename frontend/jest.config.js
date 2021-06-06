@@ -10,5 +10,7 @@ module.exports = {
     '<rootDir>/libs/geo-search/data-access',
     '<rootDir>/libs/geo-search/feature-mock-gsm-tracks',
     '<rootDir>/libs/geo-search/shell',
+    '<rootDir>/libs/delimitation/data-access',
+    '<rootDir>/libs/delimitation/feature-mock-delimitation',
   ],
 };

@@ -41,6 +41,12 @@
       ],
       "@gsm-geo-delimitation/geo-search/shell": [
         "libs/geo-search/shell/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/delimitation/data-access": [
+        "libs/delimitation/data-access/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/delimitation/feature-mock-delimitation": [
+        "libs/delimitation/feature-mock-delimitation/src/index.ts"
       ]
     }
   },

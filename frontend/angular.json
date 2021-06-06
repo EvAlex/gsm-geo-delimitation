@@ -371,6 +371,56 @@
           }
         }
       }
+    },
+    "delimitation-data-access": {
+      "projectType": "library",
+      "root": "libs/delimitation/data-access",
+      "sourceRoot": "libs/delimitation/data-access/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/delimitation/data-access/src/**/*.ts",
+              "libs/delimitation/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delimitation/data-access"],
+          "options": {
+            "jestConfig": "libs/delimitation/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "delimitation-feature-mock-delimitation": {
+      "projectType": "library",
+      "root": "libs/delimitation/feature-mock-delimitation",
+      "sourceRoot": "libs/delimitation/feature-mock-delimitation/src",
+      "prefix": "gsm-geo-delimitation",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/delimitation/feature-mock-delimitation/src/**/*.ts",
+              "libs/delimitation/feature-mock-delimitation/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/delimitation/feature-mock-delimitation"],
+          "options": {
+            "jestConfig": "libs/delimitation/feature-mock-delimitation/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
