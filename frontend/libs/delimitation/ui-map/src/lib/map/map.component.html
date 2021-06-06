@@ -27,6 +27,14 @@
           [path]="track || []"
         ></map-polyline>
       </ng-container>
+
+      <ng-container *ngFor="let zone of zones || []">
+        <map-rectangle
+          *ngIf="isZoneSet(zone)"
+          [options]="zoneOptions"
+          [bounds]="zone"
+        ></map-rectangle>
+      </ng-container>
     </google-map>
   </ng-template>
 </gsm-geo-delimitation-map-loader>
