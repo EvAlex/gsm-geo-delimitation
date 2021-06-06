@@ -1,0 +1,9 @@
+<mat-selection-list [multiple]= "false" (selectionChange)="onSelectionChange($event)">
+    <mat-list-option 
+        *ngFor="let zone of zones || []; index as i"
+        [selected]="i === selectedZoneIndex"
+        [value]="i"
+    >
+        Зона №{{i + 1}}
+    </mat-list-option>
+</mat-selection-list>

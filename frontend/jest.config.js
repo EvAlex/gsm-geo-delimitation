@@ -12,5 +12,6 @@ module.exports = {
     '<rootDir>/libs/geo-search/shell',
     '<rootDir>/libs/delimitation/data-access',
     '<rootDir>/libs/delimitation/feature-mock-delimitation',
+    '<rootDir>/libs/shared/ui-fab-menu',
   ],
 };

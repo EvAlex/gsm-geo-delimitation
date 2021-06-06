@@ -1,3 +1,30 @@
 :host {
   display: block;
 }
+
+main {
+  display: flex;
+
+  gsm-geo-delimitation-map {
+    flex: 1;
+  }
+}
+
+aside {
+  max-height: calc(100vh - 64px);
+  width: 240px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .scroll-container {
+    flex: 1;
+    overflow: hidden;
+
+    ggd-zones-list {
+      overflow: auto;
+      display: block;
+      height: 100%;
+    }
+  }
+}

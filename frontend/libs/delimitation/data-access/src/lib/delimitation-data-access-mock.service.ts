@@ -20,8 +20,10 @@ export class DelimitatonDataAccessMockService
 
   runDelimitation(): Observable<DelimitationResult> {
     const data = window.localStorage.getItem(DELIMITATION_STORAGE_KEY);
-    const tracks = JSON.parse(data) as DelimitationResult;
+    const zones = JSON.parse(data) as DelimitationResult;
 
-    return timer(1000 + 1_000 * Math.random()).pipe(mapTo(tracks || []));
+    return timer(1000 + 1_000 * Math.random()).pipe(
+      mapTo(zones || { zones: [] })
+    );
   }
 }

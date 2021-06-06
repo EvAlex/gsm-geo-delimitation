@@ -13,11 +13,29 @@
       ></tracks-list>
     </div>
 
-    <fab-menu
-      (saveTracks)="saveTracks()"
-      [canRemoveTrack]="isTrackSelected"
-      (addTrack)="addTrack()"
-      (removeTrack)="removeTrack()"
-    ></fab-menu>
+    <ggd-fab-menu>
+      <button mat-fab matTooltip="Сохранить" (click)="saveTracks()">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <button
+        mat-fab
+        color="accent"
+        matTooltip="Добавить трек"
+        (click)="addTrack()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <button
+        mat-fab
+        color="primary"
+        matTooltip="Удалить трек"
+        [disabled]="!isTrackSelected"
+        (click)="removeTrack()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ggd-fab-menu>
   </aside>
 </main>

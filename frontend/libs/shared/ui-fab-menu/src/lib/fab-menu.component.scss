@@ -1,0 +1,11 @@
+ggd-fab-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 16px;
+  left: -28px;
+
+  .mat-fab {
+    margin-bottom: 8px;
+  }
+}

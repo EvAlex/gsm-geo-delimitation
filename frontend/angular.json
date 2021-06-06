@@ -421,6 +421,31 @@
           }
         }
       }
+    },
+    "shared-ui-fab-menu": {
+      "projectType": "library",
+      "root": "libs/shared/ui-fab-menu",
+      "sourceRoot": "libs/shared/ui-fab-menu/src",
+      "prefix": "ggd",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/ui-fab-menu/src/**/*.ts",
+              "libs/shared/ui-fab-menu/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/ui-fab-menu"],
+          "options": {
+            "jestConfig": "libs/shared/ui-fab-menu/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
