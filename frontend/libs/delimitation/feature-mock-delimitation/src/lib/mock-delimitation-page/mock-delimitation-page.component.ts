@@ -13,10 +13,12 @@ import {
 import {
   DelimitatonDataAccessMock,
   DELIMITATION_DATA_ACCESS,
+  GeoZone,
 } from '@gsm-geo-delimitation/delimitation/data-access';
 import { timer, combineLatest } from 'rxjs';
-import { map, mapTo, startWith, takeWhile, tap } from 'rxjs/operators';
+import { filter, map, mapTo, startWith, takeWhile, tap } from 'rxjs/operators';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'gsm-geo-delimitation-mock-delimitation-page',
@@ -27,9 +29,11 @@ import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 export class MockDelimitationPageComponent implements OnInit {
   tracks: GeoPoint[][] = [];
 
-  zones = [];
+  zones: GeoZone[] = [];
 
   selectedZoneIndex: number = null;
+
+  readonly zoneColorControl = new FormControl();
 
   get isZoneSelected(): boolean {
     return this.selectedZoneIndex !== null;
@@ -66,6 +70,18 @@ export class MockDelimitationPageComponent implements OnInit {
         this.zones = zones;
         this.changeDetector.markForCheck();
       });
+
+    this.zoneColorControl.valueChanges
+      .pipe(filter(() => !!this.zones[this.selectedZoneIndex]))
+      .subscribe((value) => {
+        this.zones[this.selectedZoneIndex].color = value;
+      });
+  }
+
+  onZoneSelected() {
+    const zone = this.zones[this.selectedZoneIndex];
+
+    this.zoneColorControl.setValue(zone?.color);
   }
 
   saveZones() {
@@ -99,7 +115,12 @@ export class MockDelimitationPageComponent implements OnInit {
   }
 
   addZone() {
-    this.zones = this.zones.concat([[]]);
+    this.zones = this.zones.concat([
+      {
+        color: 'black',
+        bounds: { east: null, north: null, south: null, west: null },
+      },
+    ]);
     this.selectedZoneIndex = this.zones.length - 1;
   }
 

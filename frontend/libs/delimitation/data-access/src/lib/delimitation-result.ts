@@ -1,4 +1,5 @@
-type GeoZone = {
+export type GeoZone = {
+  color: string;
   bounds: {
     /**
      * East longitude in degrees. Values outside the range [-180, 180] will be wrapped to the range [-180, 180]. For

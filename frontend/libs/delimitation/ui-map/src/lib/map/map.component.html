@@ -28,12 +28,19 @@
         ></map-polyline>
       </ng-container>
 
-      <ng-container *ngFor="let zone of zones || []">
-        <map-rectangle
-          *ngIf="isZoneSet(zone)"
-          [options]="zoneOptions"
-          [bounds]="zone"
-        ></map-rectangle>
+      <ng-container *ngFor="let zone of zones || []; index as index">
+        <ng-container *ngIf="isZoneDrawMode && isZoneSet(zone)">
+          <map-rectangle
+            #r="mapRectangle"
+            [options]="getZoneOptions(index)"
+            [bounds]="zone.bounds"
+            (boundsChanged)="onZoneBoundsChanged(r.getBounds(), index)"
+          ></map-rectangle>
+          <map-polygon
+            [options]="getZoneEllipseOptions(zone)"
+            [paths]="getZoneEllipsePath(zone)"
+          ></map-polygon>
+        </ng-container>
       </ng-container>
     </google-map>
   </ng-template>

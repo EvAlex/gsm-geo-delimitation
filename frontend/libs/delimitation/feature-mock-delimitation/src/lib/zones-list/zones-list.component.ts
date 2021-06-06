@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
+import { GeoZone } from '@gsm-geo-delimitation/delimitation/data-access';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 
 @Component({
@@ -16,10 +17,7 @@ import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 })
 export class ZonesListComponent {
   @Input()
-  readonly zones: GeoPoint[][];
-
-  @Output()
-  readonly zonesChange = new EventEmitter<GeoPoint[][]>();
+  readonly zones: GeoZone[];
 
   @Input()
   selectedZoneIndex: number;

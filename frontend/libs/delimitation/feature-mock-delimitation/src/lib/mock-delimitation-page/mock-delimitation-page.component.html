@@ -9,10 +9,15 @@
   <aside>
     <div class="scroll-container">
       <ggd-zones-list
-        [(zones)]="zones"
+        [zones]="zones"
         [(selectedZoneIndex)]="selectedZoneIndex"
+        (selectedZoneIndexChange)="onZoneSelected()"
       ></ggd-zones-list>
     </div>
+    <mat-form-field *ngIf="isZoneSelected">
+      <mat-label>Цвет</mat-label>
+      <input matInput [formControl]="zoneColorControl">
+    </mat-form-field>
 
     <ggd-fab-menu>
       <button mat-fab matTooltip="Сохранить" (click)="saveZones()">

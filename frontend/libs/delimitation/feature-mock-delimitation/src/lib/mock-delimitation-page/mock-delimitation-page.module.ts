@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DelimitationDataAccessModule } from '@gsm-geo-delimitation/delimitation/data-access';
 import { ZonesListModule } from '../zones-list/zones-list.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [MockDelimitationPageComponent],
@@ -23,6 +25,8 @@ import { ZonesListModule } from '../zones-list/zones-list.module';
     SharedUiFabMenuModule,
     DelimitationDataAccessModule,
     ZonesListModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
 })
 export class MockDelimitationPageModule {}
