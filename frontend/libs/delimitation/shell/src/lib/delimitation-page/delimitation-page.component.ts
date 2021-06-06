@@ -3,12 +3,17 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { SearchFormValue } from '@gsm-geo-delimitation/delimitation/feature-delimitation';
 import {
   GeoSearchDataAccess,
   GEO_SEARCH_DATA_ACCESS,
 } from '@gsm-geo-delimitation/geo-search/data-access';
+import {
+  DelimitatonDataAccessMock,
+  DELIMITATION_DATA_ACCESS,
+} from '@gsm-geo-delimitation/delimitation/data-access';
 import { GeoPoint } from '@gsm-geo-delimitation/shared/util-geolocation';
 import { Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -21,6 +26,7 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class DelimitationPageComponent implements OnInit {
   private readonly submitSearch$ = new Subject();
+  private readonly submitDelimitation$ = new Subject();
 
   searchFormValue: SearchFormValue = {
     dateFrom: null,
@@ -39,13 +45,21 @@ export class DelimitationPageComponent implements OnInit {
     map((tracks) => tracks.map((track) => track.points))
   );
 
+  zones$ = this.submitDelimitation$.pipe(
+    switchMap(() => this.delimitationDataAccess.runDelimitation()),
+    map((result) => result.zones)
+  );
+
   isAreaSelectMode: boolean;
 
   selectedAreaBoundaryPointIndex: number;
 
   constructor(
     @Inject(GEO_SEARCH_DATA_ACCESS)
-    private readonly searchDataAccess: GeoSearchDataAccess
+    private readonly searchDataAccess: GeoSearchDataAccess,
+    @Inject(DELIMITATION_DATA_ACCESS)
+    private readonly delimitationDataAccess: DelimitatonDataAccessMock,
+    private readonly changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {}
@@ -61,5 +75,7 @@ export class DelimitationPageComponent implements OnInit {
     this.submitSearch$.next();
   }
 
-  runDelimitation() {}
+  runDelimitation() {
+    this.submitDelimitation$.next();
+  }
 }

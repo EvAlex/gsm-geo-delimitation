@@ -29,8 +29,9 @@
       </ng-container>
 
       <ng-container *ngFor="let zone of zones || []; index as index">
-        <ng-container *ngIf="isZoneDrawMode && isZoneSet(zone)">
+        <ng-container *ngIf="isZoneSet(zone)">
           <map-rectangle
+            *ngIf="isZoneDrawMode"
             #r="mapRectangle"
             [options]="getZoneOptions(index)"
             [bounds]="zone.bounds"
