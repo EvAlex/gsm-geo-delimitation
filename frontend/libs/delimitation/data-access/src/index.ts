@@ -4,3 +4,4 @@ export {
   DelimitatonDataAccess,
 } from './lib/delimitation-data-access';
 export { DelimitatonDataAccessMock } from './lib/delimitation-data-access-mock';
+export { DelimitationResult, GeoZone } from './lib/delimitation-result';
