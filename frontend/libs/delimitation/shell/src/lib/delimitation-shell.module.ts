@@ -8,6 +8,13 @@ const routes: Routes = [
     path: '',
     component: DelimitationPageComponent,
   },
+  {
+    path: 'mock-delimitation-result',
+    loadChildren: () =>
+      import(
+        '@gsm-geo-delimitation/delimitation/feature-mock-delimitation'
+      ).then((m) => m.DelimitationFeatureMockDelimitationModule),
+  },
 ];
 
 @NgModule({

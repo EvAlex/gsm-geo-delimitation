@@ -9,8 +9,6 @@ const TRACKS_STORAGE_KEY = 'gsmTracks';
 
 @Injectable()
 export class GeoSearchDataAccessMockService implements GeoSearchDataAccessMock {
-  constructor() {}
-
   saveTracks(tracks: GsmTrack[]): Observable<void> {
     window.localStorage.setItem(TRACKS_STORAGE_KEY, JSON.stringify(tracks));
 

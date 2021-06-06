@@ -31,6 +31,8 @@
     "shared-util-geolocation": { "tags": [] },
     "geo-search-data-access": { "tags": [] },
     "geo-search-feature-mock-gsm-tracks": { "tags": [] },
-    "geo-search-shell": { "tags": [] }
+    "geo-search-shell": { "tags": [] },
+    "delimitation-data-access": { "tags": [] },
+    "delimitation-feature-mock-delimitation": { "tags": [] }
   }
 }

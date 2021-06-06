@@ -60,4 +60,6 @@ export class DelimitationPageComponent implements OnInit {
   submitSearch() {
     this.submitSearch$.next();
   }
+
+  runDelimitation() {}
 }
