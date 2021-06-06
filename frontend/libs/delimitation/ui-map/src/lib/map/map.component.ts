@@ -82,30 +82,29 @@ export class MapComponent {
   isZoneDrawMode: boolean;
 
   @Input()
-  zones: [];
+  zones: google.maps.LatLngBoundsLiteral[];
 
   @Output()
-  readonly zonesChange = new EventEmitter<[]>();
+  readonly zonesChange = new EventEmitter<google.maps.LatLngBoundsLiteral[]>();
 
   @Input()
   selectedZoneIndex: number;
 
+  readonly zoneOptions: google.maps.RectangleOptions = {
+    editable: true,
+    draggable: true,
+    strokeColor: 'red',
+    fillColor: 'red',
+    fillOpacity: 0.2,
+  };
+
   onMapClick(event: google.maps.MapMouseEvent) {
     if (this.isAreaSelectMode) {
-      this.areaMarkerPoints = this.areaMarkerPoints.concat([
-        event.latLng.toJSON(),
-      ]);
-      this.areaPolygonPoints = this.areaMarkerPoints.slice();
-      this.updateMarkerOptions();
-      this.areaBoundaryChange.emit(this.areaMarkerPoints);
-    } else if (this.isTrackDrawMode && (this.tracks?.length || 0 > 0)) {
-      const index =
-        this.selectedTrackIndex >= 0
-          ? this.selectedTrackIndex
-          : this.tracks.length - 1;
-
-      this.tracks[index] = this.tracks[index].concat([event.latLng.toJSON()]);
-      this.tracksChange.emit(this.tracks);
+      this.selectArea(event);
+    } else if (this.isTrackDrawMode) {
+      this.drawTrack(event);
+    } else if (this.isZoneDrawMode) {
+      this.drawZone(event);
     }
   }
 
@@ -123,6 +122,72 @@ export class MapComponent {
   onAreaBoundaryMarkerClick(index: number) {
     this._selectedAreaBoundaryPointIndex = index;
     this.selectedAreaBoundaryPointIndexChange.emit(index);
+  }
+
+  private selectArea(event: google.maps.MapMouseEvent) {
+    this.areaMarkerPoints = this.areaMarkerPoints.concat([
+      event.latLng.toJSON(),
+    ]);
+    this.areaPolygonPoints = this.areaMarkerPoints.slice();
+    this.updateMarkerOptions();
+    this.areaBoundaryChange.emit(this.areaMarkerPoints);
+  }
+
+  private drawTrack(event: google.maps.MapMouseEvent) {
+    if (this.tracks?.length || 0 > 0) {
+      const index =
+        this.selectedTrackIndex >= 0
+          ? this.selectedTrackIndex
+          : this.tracks.length - 1;
+
+      this.tracks[index] = this.tracks[index].concat([event.latLng.toJSON()]);
+      this.tracksChange.emit(this.tracks);
+    }
+  }
+
+  private drawZone(event: google.maps.MapMouseEvent) {
+    if (!Array.isArray(this.zones) || !this.zones[this.selectedZoneIndex]) {
+      return;
+    }
+
+    const zone = this.zones[this.selectedZoneIndex];
+    const isTopLeftSet =
+      typeof zone.west === 'number' && typeof zone.north === 'number';
+    const isBottomRightSet =
+      typeof zone.east === 'number' && typeof zone.south === 'number';
+
+    if (!isTopLeftSet && !isBottomRightSet) {
+      this.zones = this.zones.map((e, i) =>
+        i === this.selectedZoneIndex
+          ? {
+              ...zone,
+              west: event.latLng.lng(),
+              north: event.latLng.lat(),
+            }
+          : e
+      );
+      this.zonesChange.emit(this.zones);
+    } else if (isTopLeftSet && !isBottomRightSet) {
+      this.zones = this.zones.map((e, i) =>
+        i === this.selectedZoneIndex
+          ? {
+              ...zone,
+              east: event.latLng.lng(),
+              south: event.latLng.lat(),
+            }
+          : e
+      );
+      this.zonesChange.emit(this.zones);
+    }
+  }
+
+  isZoneSet(zone: google.maps.LatLngBoundsLiteral): boolean {
+    const isTopLeftSet =
+      typeof zone.west === 'number' && typeof zone.north === 'number';
+    const isBottomRightSet =
+      typeof zone.east === 'number' && typeof zone.south === 'number';
+
+    return isTopLeftSet && isBottomRightSet;
   }
 
   private updateMarkerOptions() {
