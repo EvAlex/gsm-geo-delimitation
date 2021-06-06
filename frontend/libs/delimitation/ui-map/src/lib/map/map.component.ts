@@ -78,6 +78,18 @@ export class MapComponent {
     clickable: false,
   };
 
+  @Input()
+  isZoneDrawMode: boolean;
+
+  @Input()
+  zones: [];
+
+  @Output()
+  readonly zonesChange = new EventEmitter<[]>();
+
+  @Input()
+  selectedZoneIndex: number;
+
   onMapClick(event: google.maps.MapMouseEvent) {
     if (this.isAreaSelectMode) {
       this.areaMarkerPoints = this.areaMarkerPoints.concat([

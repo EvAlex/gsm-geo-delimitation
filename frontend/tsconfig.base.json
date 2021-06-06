@@ -47,6 +47,9 @@
       ],
       "@gsm-geo-delimitation/delimitation/feature-mock-delimitation": [
         "libs/delimitation/feature-mock-delimitation/src/index.ts"
+      ],
+      "@gsm-geo-delimitation/shared/ui-fab-menu": [
+        "libs/shared/ui-fab-menu/src/index.ts"
       ]
     }
   },

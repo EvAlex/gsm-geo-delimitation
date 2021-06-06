@@ -1,3 +1,5 @@
-export type DelimitationResult = {
+type GeoZone = {};
 
-}
+export type DelimitationResult = {
+  zones: GeoZone[];
+};

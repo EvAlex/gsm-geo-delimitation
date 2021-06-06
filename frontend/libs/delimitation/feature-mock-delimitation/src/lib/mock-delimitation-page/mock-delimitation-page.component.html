@@ -1,1 +1,42 @@
-<p>mock-delimitation-page works!</p>
+<main>
+  <gsm-geo-delimitation-map
+    [isZoneDrawMode]="true"
+    [tracks]="tracks"
+    [(zones)]="zones"
+    [selectedZoneIndex]="selectedZoneIndex"
+  ></gsm-geo-delimitation-map>
+
+  <aside>
+    <div class="scroll-container">
+      <ggd-zones-list
+        [(zones)]="zones"
+        [(selectedZoneIndex)]="selectedZoneIndex"
+      ></ggd-zones-list>
+    </div>
+
+    <ggd-fab-menu>
+      <button mat-fab matTooltip="Сохранить" (click)="saveZones()">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <button
+        mat-fab
+        color="accent"
+        matTooltip="Добавить зону"
+        (click)="addZone()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <button
+        mat-fab
+        color="primary"
+        matTooltip="Удалить зону"
+        [disabled]="!isZoneSelected"
+        (click)="removeZone()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ggd-fab-menu>
+  </aside>
+</main>
